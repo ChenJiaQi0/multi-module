@@ -14,7 +14,7 @@ public class demo1 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String agent = req.getHeader("User-Agent");
-        if (agent.contains("Windows") || agent.toLowerCase().contains("linux")){
+        if (agent.toLowerCase().contains("windows") || agent.toLowerCase().contains("linux")){
             req.getRequestDispatcher("client.jsp").forward(req,resp);
         }else {
             req.getRequestDispatcher("phone.jsp").forward(req,resp);
