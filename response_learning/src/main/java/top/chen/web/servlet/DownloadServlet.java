@@ -24,12 +24,12 @@ public class DownloadServlet extends HttpServlet {
         String realPath = realPath = servletContext.getRealPath("/res/" + filename);;
 
         FileInputStream fis = new FileInputStream(realPath);
-        //3.响应头
+        //3.设置响应头
         String mimeType = servletContext.getMimeType(filename);
         System.out.println(mimeType);
         resp.setHeader("content-type", mimeType);
         resp.setHeader("content-disposition", "attachment;filename="+filename);
-        req.getRequestDispatcher("show.html").forward(req, resp);
+
         ServletOutputStream sos = resp.getOutputStream();
         byte[] buff = new byte[1024 * 8];
         int len;
@@ -38,6 +38,5 @@ public class DownloadServlet extends HttpServlet {
         }
         fis.close();
         sos.close();
-
     }
 }
