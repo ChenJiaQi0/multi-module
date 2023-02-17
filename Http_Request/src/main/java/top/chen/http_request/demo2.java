@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+import static top.chen.http_request.Utils.Consts.*;
 
 //登录跳转
 @WebServlet("/demo2")
-public class demo2 extends HttpServlet implements Consts {
+public class demo2 extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
