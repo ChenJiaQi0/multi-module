@@ -19,7 +19,6 @@ public class VerifiUser extends HttpServlet {
         String account = String.valueOf(req.getParameter("account"));
         User user = userService.findUser(account);
         if (user!=null){
-            req.setAttribute("flag","用户可用");
             resp.getWriter().write("false");
         }else{
             resp.getWriter().write("true");

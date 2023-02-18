@@ -32,6 +32,7 @@
             </div>
             <div class="reg-box" style="display: none">
                 <h1>立即注册</h1>
+                <form action="register" method="post">
                 <section>
                     <label for="username">用户名</label>
                     <input type="text" id="username" name="nickname"/>
@@ -45,7 +46,8 @@
                     <label for="password">密码</label>
                     <input type="password" id="password" name="password"/>
                 </section>
-                <button type="button">注册</button>
+                <button type="submit">注册</button>
+                </form>
                 <button type="button" class="other">
                     使用<span style="font-weight: 900; color: #455a81">二维码</span
                 >扫码注册

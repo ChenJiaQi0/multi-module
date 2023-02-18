@@ -14,4 +14,6 @@ public interface UserService {
     User findUser(String account);
 
     User findUser(String account,String password);
+
+    int addUser(User user);
 }

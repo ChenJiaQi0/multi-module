@@ -27,4 +27,9 @@ public class UserServiceImpl implements UserService {
     public User findUser(String account, String password) {
         return userDao.findUser(account,password);
     }
+
+    @Override
+    public int addUser(User user) {
+        return userDao.addUser(user);
+    }
 }
