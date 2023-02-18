@@ -22,6 +22,7 @@
         <module>response_learning</module>
         <module>session-learning</module>
         <module>Exer_SC</module>
+        <module>ajax-learning</module>
     </modules>
 
     <dependencies>
