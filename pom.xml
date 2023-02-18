@@ -21,6 +21,7 @@
         <module>Tomcat_Servlet</module>
         <module>response_learning</module>
         <module>session-learning</module>
+        <module>Exer_SC</module>
     </modules>
 
     <dependencies>
