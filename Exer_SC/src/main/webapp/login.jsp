@@ -15,12 +15,12 @@
                 <h1>欢迎回来</h1>
                 <form action="login" method="post" class="login-box">
                 <section>
-                    <label for="email">账号</label>
-                    <input type="text" id="account" name="account"/>
+                    <label for="account">账号</label>
+                    <input type="text" class="account" name="account"/>
                 </section>
                 <section>
                     <label for="password">密码</label>
-                    <input type="password" id="password" name="password"/>
+                    <input type="password" class="password" name="password"/>
                     <span>忘记密码?</span>
                 </section>
                 <button type="submit">登录</button>
@@ -34,15 +34,16 @@
                 <h1>立即注册</h1>
                 <section>
                     <label for="username">用户名</label>
-                    <input type="text" id="username" />
+                    <input type="text" id="username" name="nickname"/>
                 </section>
                 <section>
-                    <label for="email">邮箱</label>
-                    <input type="text" id="email" />
+                    <label for="account">账号</label>
+                    <input type="text" id="account" name="account"/>
+                    <span id="flag"></span>
                 </section>
                 <section>
                     <label for="password">密码</label>
-                    <input type="password" id="password" />
+                    <input type="password" id="password" name="password"/>
                 </section>
                 <button type="button">注册</button>
                 <button type="button" class="other">
@@ -68,6 +69,9 @@
         let target = document.querySelector('.transferToReg');
         let title = document.querySelector('.title');
         let subTitle = document.querySelector('.subTitle');
+        let account_inp = document.querySelector('.account');
+        let password_inp = document.querySelector('.password');
+        let flag = document.querySelector('#flag');
         transfer.innerText === '注册'
             ? (() => {
                 target.style.left = 0;
@@ -79,6 +83,10 @@
                     login.style.display = 'none';
                     reg.style.display = 'flex';
                 }, 300);
+                document.getElementById("username").value="";
+                document.getElementById("account").value="";
+                document.getElementById("password").value="";
+                flag.innerHTML = "";
             })()
             : (() => {
                 target.style.left = 640 + 'px';
@@ -90,8 +98,45 @@
                     login.style.display = 'flex';
                     reg.style.display = 'none';
                 }, 300);
+                account_inp.value="";
+                password_inp.value="";
             })();
     });
+
+    let account = document.querySelector('#account');
+    account.addEventListener('blur',IfUser);
+    function IfUser() {
+        let xHttp;
+        if (window.XMLHttpRequest) {
+            xHttp = new XMLHttpRequest();
+        } else {
+            // for IE6、IE6
+            xHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        // 2. 发送请求
+        xHttp.open("GET", "http://localhost:9094/verifi" + '?account=' + account.value);
+        xHttp.send();
+
+        // 3. 获取响应
+        xHttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                if (xHttp.responseText === 'true'){
+                    document.getElementById("flag").innerText = '用户可用';
+                    document.getElementById("flag").style.color="green";
+                    setTimeout(()=>{
+                        document.getElementById("flag").innerText = "";
+                    },2000);
+                }else{
+                    document.getElementById("flag").innerText = '用户已存在';
+                    document.getElementById("flag").style.color="red";
+                    setTimeout(()=>{
+                        document.getElementById("flag").innerText = "";
+                    },2000);
+                }
+            }
+        }
+    }
+
 </script>
 <style>
     * {

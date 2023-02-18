@@ -10,4 +10,8 @@ public interface UserService {
      * @return登录用户信息
      */
     User signIn(String account, String password);
+
+    User findUser(String account);
+
+    User findUser(String account,String password);
 }

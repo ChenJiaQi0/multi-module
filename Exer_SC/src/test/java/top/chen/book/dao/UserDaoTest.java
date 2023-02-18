@@ -8,12 +8,12 @@ import java.util.Date;
 
 public class UserDaoTest {
     private UserDao userDao = new UserDaoImpl();
-    @Test
-    public void findUser(){
-        User userdto = User.builder().account("chen@qq.com").password("698d51a19d8a121ce581499d7b701668").build();
-        User user = userDao.findUser(userdto);
-        System.out.println(user);
-    }
+////    @Test
+////    public void findUser(){
+////        User userdto = User.builder().account("chen@qq.com").password("698d51a19d8a121ce581499d7b701668").build();
+////        User user = userDao.findUser(userdto);
+////        System.out.println(user);
+//    }
 
     @Test
     public void AddUser(){

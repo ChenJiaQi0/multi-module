@@ -15,6 +15,16 @@ public class UserServiceImpl implements UserService {
                 .account(account)
                 .password(Md5Password)
                 .build();
-        return userDao.findUser(user);
+        return userDao.findUser(user.getAccount(),user.getPassword());
+    }
+
+    @Override
+    public User findUser(String account) {
+        return userDao.findUser(account);
+    }
+
+    @Override
+    public User findUser(String account, String password) {
+        return userDao.findUser(account,password);
     }
 }

@@ -21,12 +21,24 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findUser(User userDto) {
-        String sql = "select * from t_user where account=? and password=?";
+    public User findUser(String account) {
+        String sql = "select * from t_user where account=?";
         try {
-            return template.queryForObject(sql,new BeanPropertyRowMapper<>(User.class),userDto.getAccount(),userDto.getPassword());
+            return template.queryForObject(sql,new BeanPropertyRowMapper<>(User.class),account);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
+
+    @Override
+    public User findUser(String account, String password) {
+        String sql = "select * from t_user where account=? and password=?";
+        try {
+            return template.queryForObject(sql,new BeanPropertyRowMapper<>(User.class),account,password);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+
 }

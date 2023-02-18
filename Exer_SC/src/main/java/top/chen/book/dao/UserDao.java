@@ -12,8 +12,10 @@ public interface UserDao {
 
     /**
      * 根据查询对象查询用户是否存在
-     * @param userDto
+     * @param account
      * @return  查询结果
      */
-    User findUser(User userDto);
+    User findUser(String account);
+
+    User findUser(String account,String password);
 }
