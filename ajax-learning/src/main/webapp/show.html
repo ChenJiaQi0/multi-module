@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <select id="v1">
+    <option value="-1" selected="selected">请选择</option>
+  </select>
+  <select id="v2">
+  </select>
+</body>
+<script>
+  let v1 = document.getElementById("v1");
+  let v2 = document.getElementById("v2");
+  axios.get('/channel',{params: {"level":'1'}}).then(function (resp){
+    // console.log(resp.data);
+    for (let i=0;i<resp.data.length;i++){
+      const channel = resp.data[i];
+      v1.options.add(new Option(channel.name,channel.code));
+    }
+  });
+  v1.onchange=function (){
+    for(let i=v2.options.length-1 ; i>= 0 ; i--)
+      v2.options[i] = null;
+    axios.get('/channel',{params: {"level":'2',"parent":v1.value}}).then(function (resp){
+      console.log(resp.data);
+      for (let i=0;i<resp.data.length;i++){
+        const channel = resp.data[i];
+        v2.options.add(new Option(channel.name,channel.code));
+      }});
+  };
+</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>随机一言</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body style="background: url('1.jpg');background-size:100%;">
+<div style = "width:100%;overflow: auto;height: 800px;" id="scrdiv">
+    <div style = "height:200px;width:1000px;margin: 0 auto" >
+        <table border="0" cellspacing="0" cellpadding="15">
+            <tbody id="tb" style="border: 0;">
+            </tbody>
+        </table>
+    </div>
+    <div style = "width:100px; float:right;">
+        <div><button id="b1" type="button" style="background: url('2.png');background-size: 100%;height: 80px;width: 80px;border-radius: 40px;border: 0px;position: fixed;top: 80%"/></div>
+        <div style="position: fixed;top: 95%;"><button id="b2" onclick="scro()" style="background: transparent;border-width: 0px;width: 80px;display: none">回到顶部</button></div>
+    </div>
+
+</div>
+</body>
+<script>
+    let b = document.getElementById("b1");
+    let tb = document.getElementById("tb");
+    // let pic = "";
+    b.addEventListener('click',function () {
+        // pic=getPic();
+        axios.get('https://api.quotable.io/random').then(function (resp) {
+            let data = resp.data;
+            // console.log(resp.data);
+            let tr = document.createElement("tr");
+            tr.style.background="darkgray";
+            tr.id = data._id;
+            tr.innerHTML = '<td><img src="3.png" style="width: 50%;height: 50%"/></td>\n' +
+                '<td>'+data.author+'</td>\n' +
+                '            <td>'+data.content+'</td>\n' +
+                '            <td>'+data.dateModified+'</td>\n' +
+                '            <td><button id='+data._id+' onclick="remove(id)" style="background: transparent;border-width: 0px;width: 50px">删除</button>\n' +
+                '            </td>';
+            tb.appendChild(tr);
+        })
+    });
+    function remove(id) {
+        let tr = document.getElementById(id);
+        tb.removeChild(tr);
+    };
+    // function getPic(){
+    //     axios.get('https://api.thedogapi.com/v1/images/search?size=full').then(function (resp) {
+    //         pic = resp.data[0].url;
+    //     })
+    // };
+
+    function isScrollBottom(obj) {
+        if (obj.scrollTop + obj.clientHeight === obj.scrollHeight) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+    let scrdiv = document.getElementById("scrdiv");
+    scrdiv.addEventListener('scroll',function (e){
+        if (isScrollBottom(this)){
+            document.getElementById("b2").style.display='';
+        }
+    });
+    function scro() {
+        document.getElementById('scrdiv').scrollTo(0,0);
+        document.getElementById("b2").style.display='none';
+    }
+</script>
+</html>
